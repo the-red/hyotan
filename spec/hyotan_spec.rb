@@ -33,8 +33,16 @@ RSpec.describe Hyotan do
     EOS
   end
 
-  it 'hyotan_treeの疎通確認' do
+  it 'CaboCha::Tree#hyotan_tree' do
     expect(@tree.hyotan_tree.class).to eq Hyotan::Tree
+  end
+
+  it 'Hyotan::Tree#chunks' do
+    expect(@tree.hyotan_tree.chunks.class).to eq Array
+  end
+
+  it 'Hyotan::Tree#chunks[0]' do
+    expect(@tree.hyotan_tree.chunks[0].class).to eq Hyotan::Chunk
   end
 
   it 'Hyotan::Chunk#id' do
@@ -63,6 +71,10 @@ RSpec.describe Hyotan do
 
   it 'Hyotan::Chunk#tokens' do
      expect(@tree.hyotan_tree.chunks[0].tokens.class).to eq(Array)
+  end
+
+  it 'Hyotan::Chunk#tokens[0]' do
+     expect(@tree.hyotan_tree.chunks[0].tokens[0].class).to eq(Hyotan::Token)
   end
 
   it 'Hyotan::Token#id' do
