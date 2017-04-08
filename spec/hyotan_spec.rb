@@ -64,4 +64,16 @@ RSpec.describe Hyotan do
   it 'Hyotan::Chunk#tokens' do
      expect(@tree.hyotan_tree.chunks[0].tokens.class).to eq(Array)
   end
+
+  it 'Hyotan::Token#id' do
+     expect(@tree.hyotan_tree.chunks[0].tokens[0].id).to eq(0)
+  end
+
+  it 'Hyotan::Token#feature' do
+     expect(@tree.hyotan_tree.chunks[0].tokens[0].feature).to eq('名詞,代名詞,一般,*,*,*,それ,ソレ,ソレ')
+  end
+
+  it 'Hyotan::Token#surface' do
+     expect(@tree.hyotan_tree.chunks[0].tokens[0].surface).to eq('それ')
+  end
 end
