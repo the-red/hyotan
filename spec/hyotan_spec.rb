@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'spec_helper'
+using Hyotan
 
 RSpec.describe Hyotan do
   it 'has a version number' do
