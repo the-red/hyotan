@@ -29,4 +29,9 @@ RSpec.describe Hyotan do
     </sentence>
     EOS
   end
+
+  it 'hyotan_treeの疎通確認' do
+    tree = CaboCha::Parser.new.parse('それは世間が、ゆるさない')
+    expect(tree.hyotan_tree.class).to eq Hyotan::Tree
+  end
 end
