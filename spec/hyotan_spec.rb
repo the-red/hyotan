@@ -7,7 +7,10 @@ RSpec.describe Hyotan do
   end
 
   it 'cabocha -f3 のXML出力' do
-    output = <<~EOS
+    tree = CaboCha::Parser.new.parse('それは世間が、ゆるさない')
+    f3_xml = tree.toString(CaboCha::FORMAT_XML).force_encoding('utf-8').encode('utf-8')
+
+    expect(f3_xml).to eq(<<~EOS)
     <sentence>
      <chunk id="0" link="2" rel="D" score="-0.744433" head="0" func="1">
       <tok id="0" feature="名詞,代名詞,一般,*,*,*,それ,ソレ,ソレ">それ</tok>
@@ -24,6 +27,5 @@ RSpec.describe Hyotan do
      </chunk>
     </sentence>
     EOS
-    expect(Hyotan::MyCaboCha.new.run('それは世間が、ゆるさない')).to eq(output)
   end
 end
