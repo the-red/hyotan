@@ -3,13 +3,16 @@ require 'spec_helper'
 using Hyotan
 
 RSpec.describe Hyotan do
+  before do
+    @tree = CaboCha::Parser.new.parse('それは世間が、ゆるさない')
+  end
+
   it 'has a version number' do
     expect(Hyotan::VERSION).not_to be nil
   end
 
   it 'cabocha -f3 のXML出力' do
-    tree = CaboCha::Parser.new.parse('それは世間が、ゆるさない')
-    f3_xml = tree.toString(CaboCha::FORMAT_XML).force_encoding('utf-8').encode('utf-8')
+    f3_xml = @tree.toString(CaboCha::FORMAT_XML).force_encoding('utf-8').encode('utf-8')
 
     expect(f3_xml).to eq(<<~EOS)
     <sentence>
@@ -31,7 +34,34 @@ RSpec.describe Hyotan do
   end
 
   it 'hyotan_treeの疎通確認' do
-    tree = CaboCha::Parser.new.parse('それは世間が、ゆるさない')
-    expect(tree.hyotan_tree.class).to eq Hyotan::Tree
+    expect(@tree.hyotan_tree.class).to eq Hyotan::Tree
+  end
+
+  it 'Hyotan::Chunk#id' do
+     expect(@tree.hyotan_tree.chunks[0].id).to eq(0)
+  end
+
+  it 'Hyotan::Chunk#link' do
+     expect(@tree.hyotan_tree.chunks[0].link).to eq(2)
+  end
+
+  it 'Hyotan::Chunk#rel' do
+     expect(@tree.hyotan_tree.chunks[0].rel).to eq('D')
+  end
+
+  it 'Hyotan::Chunk#score' do
+     expect(@tree.hyotan_tree.chunks[0].score).to eq(-0.744433)
+  end
+
+  it 'Hyotan::Chunk#head' do
+     expect(@tree.hyotan_tree.chunks[0].head).to eq(0)
+  end
+
+  it 'Hyotan::Chunk#func' do
+     expect(@tree.hyotan_tree.chunks[0].func).to eq(1)
+  end
+
+  it 'Hyotan::Chunk#tokens' do
+     expect(@tree.hyotan_tree.chunks[0].tokens.class).to eq(Array)
   end
 end
