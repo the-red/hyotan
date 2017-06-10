@@ -23,6 +23,10 @@ module Hyotan
     attribute :id, Integer
     attribute :feature, String
     content :surface
+
+    def to_s
+      self.surface
+    end
   end
 
   class Chunk
