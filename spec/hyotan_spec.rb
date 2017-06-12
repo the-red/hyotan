@@ -90,6 +90,7 @@ RSpec.describe Hyotan do
   end
 
   it 'Hyotan::Token#to_s' do
-     expect(@tree.hyotan_tree.chunks[0].tokens[0].to_s).to eq('それ')
+    puts @tree.hyotan_tree.class
+    expect(@tree.hyotan_tree.chunks[0].tokens[0].to_s).to eq('それ')
   end
 end
